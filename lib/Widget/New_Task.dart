@@ -57,7 +57,7 @@ class _NewTaskState extends State<NewTask> {
           left: 10,
           bottom: MediaQuery.of(context).viewInsets.bottom + 10,
         ),
-        height: MediaQuery.of(context).size.height * 0.8,
+        height: MediaQuery.of(context).size.height * 0.5,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [

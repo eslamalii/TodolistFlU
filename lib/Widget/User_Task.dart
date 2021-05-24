@@ -11,33 +11,7 @@ class UserTask extends StatefulWidget {
 class _UserTaskState extends State<UserTask> {
   int counter;
 
-  final List<Task> _list = [
-    // Task(
-    //   id: 1,
-    //   taskNmae: 'Eslam',
-    //   date: DateTime.now(),
-    // ),
-    // Task(
-    //   id: 2,
-    //   taskNmae: 'Ahmed',
-    //   date: DateTime.now(),
-    // ),
-    // Task(
-    //   id: 3,
-    //   taskNmae: 'Amin',
-    //   date: DateTime.now(),
-    // ),
-    // Task(
-    //   id: 4,
-    //   taskNmae: 'AS',
-    //   date: DateTime.now(),
-    // ),
-    // Task(
-    //   id: 5,
-    //   taskNmae: 'AKL',
-    //   date: DateTime.now(),
-    // ),
-  ];
+  final List<Task> _list = [];
 
   void _addNewUser(String name, DateTime dateTime) {
     Task task = new Task(

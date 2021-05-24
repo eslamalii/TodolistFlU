@@ -24,17 +24,6 @@ class Tasklist extends StatelessWidget {
               subtitle: Text(DateFormat.yMMMEd().format(tasks[index].date)),
             ),
           );
-
-          // Container(
-          //   padding: EdgeInsets.all(5),
-          //   child: Column(
-          //     crossAxisAlignment: CrossAxisAlignment.start,
-          //     children: [
-          //       Text(tasks[index].taskNmae),
-          //       Text(DateFormat.yMMMEd().format(tasks[index].date)),
-          //     ],
-          //   ),
-          // );
         },
         itemCount: tasks.length,
       ),
