@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:todolist/Widget/User_Task.dart';
+
+import '../Widget/User_Task.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,6 +11,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        textTheme: ThemeData.light().textTheme.copyWith(
+              headline3: TextStyle(fontWeight: FontWeight.bold),
+            ),
+        appBarTheme: ThemeData.light()
+            .appBarTheme
+            .copyWith(backgroundColor: Colors.black),
+      ),
       title: "Todolist",
       home: MyHomePage(),
     );
@@ -18,8 +27,6 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: UserTask(),
-    );
+    return UserTask();
   }
 }

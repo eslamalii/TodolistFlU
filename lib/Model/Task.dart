@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 
 class Task {
-  final int id;
+  final String id;
   final String taskNmae;
   final DateTime date;
 

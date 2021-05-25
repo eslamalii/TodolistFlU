@@ -1,6 +1,10 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:todolist/Widget/New_Task.dart';
-import 'package:todolist/Widget/Tasklist.dart';
+
+import '../Widget/New_Task.dart';
+import '../Widget/Tasklist.dart';
 import '../Model/Task.dart';
 
 class UserTask extends StatefulWidget {
@@ -16,12 +20,18 @@ class _UserTaskState extends State<UserTask> {
   void _addNewUser(String name, DateTime dateTime) {
     Task task = new Task(
       date: dateTime,
-      id: 6,
+      id: DateTime.now().toString(),
       taskNmae: name,
     );
 
     setState(() {
       _list.add(task);
+    });
+  }
+
+  void _deleteTask(String id) {
+    setState(() {
+      _list.removeWhere((element) => element.id == id);
     });
   }
 
@@ -42,25 +52,56 @@ class _UserTaskState extends State<UserTask> {
     );
   }
 
+  Widget _appBar() {
+    return Platform.isIOS
+        ? CupertinoNavigationBar(
+            middle: Text("Todolist"),
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                GestureDetector(
+                  child: Icon(Icons.add),
+                  onTap: () => _startNewTaskPage(context),
+                )
+              ],
+            ),
+          )
+        : AppBar(
+            title: Text("TodoList"),
+          );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("TodoList"),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Tasklist(_list),
-          ],
-        ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => _startNewTaskPage(context),
-        child: Icon(Icons.add),
-      ),
-    );
+    final PreferredSizeWidget appBar = _appBar();
+
+    return Platform.isIOS
+        ? CupertinoPageScaffold(
+            navigationBar: appBar,
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Tasklist(_list, _deleteTask),
+                ],
+              ),
+            ),
+          )
+        : Scaffold(
+            appBar: appBar,
+            body: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Tasklist(_list, _deleteTask),
+                ],
+              ),
+            ),
+            floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+            floatingActionButton: FloatingActionButton(
+              onPressed: () => _startNewTaskPage(context),
+              child: Icon(Icons.add),
+            ),
+          );
   }
 }
